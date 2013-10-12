@@ -2,10 +2,14 @@
 var connect = require('connect')
     , express = require('express')
     , io = require('socket.io')
-    , port = (process.env.PORT || 8081);
+    , port = (process.env.PORT || 8089);
 
 //Setup Express
 var server = express.createServer();
+
+//Setup debug
+var log = require('winston');
+
 server.configure(function(){
     server.set('views', __dirname + '/views');
     server.set('view options', { layout: false });
@@ -35,7 +39,9 @@ server.error(function(err, req, res, next){
                 },status: 500 });
     }
 });
+
 server.listen( port);
+log.info('server is up and running');
 
 //Setup Socket.IO
 var io = io.listen(server);
@@ -58,6 +64,7 @@ io.sockets.on('connection', function(socket){
 /////// ADD ALL YOUR ROUTES HERE  /////////
 
 server.get('/', function(req,res){
+
   res.render('index.jade', {
     locals : { 
               title : 'Your Page Title'
@@ -68,6 +75,22 @@ server.get('/', function(req,res){
   });
 });
 
+//Custom test Route for
+server.get('/test', function(req, res){
+
+
+    res.status = 200;
+    (function() {
+
+        var a = 1 , b = 2; // переменные для нашего скрипта
+
+        console.log(a+b);
+//        alert("hi");
+        // код скрипта
+
+
+    })();
+});
 
 //A Route for Creating a 500 Error (Useful to keep around)
 server.get('/500', function(req, res){
@@ -76,6 +99,7 @@ server.get('/500', function(req, res){
 
 //The 404 Route (ALWAYS Keep this as the last route)
 server.get('/*', function(req, res){
+    log.error("page is not found!");
     throw new NotFound;
 });
 

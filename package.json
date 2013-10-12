@@ -1,7 +1,7 @@
 {
-  "name": "YOUR-PROJECT-NAME-HERE",
-  "description": "YOUR PROJECT DESCRIPTION HERE",
-  "author": "YOUR NAME <your@emailaddress.com>",
+  "name": "My-first-test-prj-title",
+  "description": "My-first-test-prj-desc",
+  "author": "Dzmitry_Hubin <dzmitry.hubin@gmail.com>",
   "version": "0.0.1",
   "dependencies": {
     "connect": "1.8.5",
