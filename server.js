@@ -41,6 +41,7 @@ server.error(function(err, req, res, next){
 });
 
 server.listen( port);
+//just comment
 log.info('server is up and running');
 
 //Setup Socket.IO
